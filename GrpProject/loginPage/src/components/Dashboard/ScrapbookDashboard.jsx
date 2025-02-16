@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; // Importing React and useState hook for state management
+// Importing CSS
 import "./ScrapbookDashboard.css";
-import "./styles.css";
+import "./styles.css"; // Importing another CSS file for additional styles
 
 const ScrapbookDashboard = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [activeTab, setActiveTab] = useState("gallery");
+  const [darkMode, setDarkMode] = useState(false); // State to manage dark mode (true for dark, false for light)
+
+  const [activeTab, setActiveTab] = useState("gallery"); // State to manage the active tab (default is "gallery")
 
   // Example scrapbook entries
   //   const sampleEntries = [
@@ -13,11 +15,14 @@ const ScrapbookDashboard = () => {
   //     { title: "Birthday Celebration", image: "https://via.placeholder.com/200", description: "A special day with family." }
   //   ];
 
+  // made by Vansh and Arshia
+
   const sampleEntries = [
+    // Array of sample scrapbook entries
     {
-      title: "Trip to the Mountains",
-      image: "mountain.jpeg",
-      description: "A beautiful memory from the hills.",
+      title: "Trip to the Mountains", // Entry title
+      image: "mountain.jpeg", // Image URL
+      description: "A beautiful memory from the hills.", // Entry description
     },
     {
       title: "Beach Vacation",
@@ -37,6 +42,8 @@ const ScrapbookDashboard = () => {
       <aside className="sidebar">
         <h2>Scrapbook</h2>
         <ul>
+          {" "}
+          {/* List of navigation buttons */}
           <li>
             <button onClick={() => setActiveTab("gallery")}>Gallery</button>
           </li>
@@ -45,7 +52,8 @@ const ScrapbookDashboard = () => {
           </li>
           <li>
             <button onClick={() => setDarkMode(!darkMode)}>
-              {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+              {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}{" "}
+              {/* Toggle button text based on the current mode */}
             </button>
           </li>
         </ul>
@@ -55,13 +63,18 @@ const ScrapbookDashboard = () => {
       <main className="content">
         <h2>Scrapbook Gallery</h2>
         <div className="scrapbook-grid">
-          {sampleEntries.map((entry, index) => (
-            <div className="scrapbook-card" key={index}>
-              <img src={entry.image} alt={entry.title} />
-              <h3>{entry.title}</h3>
-              <p>{entry.description}</p>
-            </div>
-          ))}
+          {sampleEntries.map(
+            (
+              entry,
+              index // Mapping over sample entries to render each entry
+            ) => (
+              <div className="scrapbook-card" key={index}>
+                <img src={entry.image} alt={entry.title} />
+                <h3>{entry.title}</h3>
+                <p>{entry.description}</p>
+              </div>
+            )
+          )}
         </div>
       </main>
     </div>
