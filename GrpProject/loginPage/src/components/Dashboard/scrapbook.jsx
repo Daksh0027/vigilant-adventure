@@ -62,7 +62,7 @@ const Scrapbook = () => {
       <div className={styles.scrapbookContainer}>
         {/* Sidebar */}
         <div className={styles.sidebar}>
-          <div className={styles.logo}>📖 Scrapbook</div>
+          <div className={styles.logo}>📖 MEMORA</div>
           <button className={styles.toggleBtn}>☰</button>
 
           <ul className={styles.menu}>
