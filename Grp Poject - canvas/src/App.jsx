@@ -1,3 +1,4 @@
+// Made By Ayush Jha
 import "./style.css";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
@@ -61,7 +62,8 @@ const ScrapbookCanvas = () => {
     setIsDrawing((prev) => !prev);
     setIsErasing(false);
 
-    CanvasInstance.current.isDrawingMode = !CanvasInstance.current.isDrawingMode;
+    CanvasInstance.current.isDrawingMode =
+      !CanvasInstance.current.isDrawingMode;
     if (CanvasInstance.current.isDrawingMode) {
       CanvasInstance.current.freeDrawingBrush.width = 5;
       CanvasInstance.current.freeDrawingBrush.color = "#000000";
@@ -75,7 +77,8 @@ const ScrapbookCanvas = () => {
     setIsErasing((prev) => !prev);
     setIsDrawing(false);
 
-    CanvasInstance.current.isDrawingMode = !CanvasInstance.current.isDrawingMode;
+    CanvasInstance.current.isDrawingMode =
+      !CanvasInstance.current.isDrawingMode;
     if (CanvasInstance.current.isDrawingMode) {
       CanvasInstance.current.freeDrawingBrush.width = 10;
       CanvasInstance.current.freeDrawingBrush.color = "#ffffff"; // Eraser effect
@@ -109,17 +112,63 @@ const ScrapbookCanvas = () => {
     );
   };
 
+  // Save to Local Storage
+  const saveToLocal = () => {
+    if (!CanvasInstance.current) return;
+
+    const dataURL = CanvasInstance.current.toDataURL({ format: "png" });
+    localStorage.setItem("savedScrapbookPage", dataURL);
+    alert("Scrapbook page saved successfully!");
+  };
+
+  // Load from Local Storage
+  const loadFromLocal = () => {
+    if (!CanvasInstance.current) return;
+
+    const savedImage = localStorage.getItem("savedScrapbookPage");
+    if (savedImage) {
+      fabric.Image.fromURL(savedImage, (img) => {
+        img.set({
+          left: 50,
+          top: 50,
+          selectable: true,
+        });
+
+        CanvasInstance.current.add(img);
+        CanvasInstance.current.renderAll();
+      });
+    } else {
+      alert("No saved scrapbook page found!");
+    }
+  };
+
   return (
     <div className="container">
       {/* Sidebar */}
       <div className="sidebar">
-        <input type="file" accept="image/*" onChange={ImageUpload} className="file-input" />
-        <button onClick={toggleDoodleMode}>{isDrawing ? "Disable Doodling" : "Enable Doodling"}</button>
-        <button onClick={toggleEraserMode}>{isErasing ? "Disable Eraser" : "Enable Eraser"}</button>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={ImageUpload}
+          className="file-input"
+        />
+        <button onClick={toggleDoodleMode}>
+          {isDrawing ? "Disable Doodling" : "Enable Doodling"}
+        </button>
+        <button onClick={toggleEraserMode}>
+          {isErasing ? "Disable Eraser" : "Enable Eraser"}
+        </button>
         <button onClick={() => addSticker("❤️")}>Add Heart Sticker</button>
         <button onClick={() => addSticker("⭐")}>Add Star Sticker</button>
-        <button onClick={clearCanvas} className="clear-btn">Clear Canvas</button>
-        <button className="Submit-btn">Submit</button>
+        <button onClick={clearCanvas} className="clear-btn">
+          Clear Canvas
+        </button>
+        <button onClick={saveToLocal} className="Submit-btn">
+          Submit
+        </button>
+        <button onClick={loadFromLocal} className="Load-btn">
+          Load Last Page
+        </button>
       </div>
 
       {/* Canvas Section */}
