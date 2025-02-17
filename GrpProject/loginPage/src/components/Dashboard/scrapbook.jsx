@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router";
 import styles from "./Scrapbook.module.css"; // Correctly import the CSS module
 
-const Scrapbook = () => {
+const ScrapbookDash = () => {
   const [entries, setEntries] = useState([
     {
       title: "Trip to Paris",
@@ -107,6 +108,9 @@ const Scrapbook = () => {
                   >
                     ✏️
                   </button>
+                  <Link to="/Canvas" className={styles.OpenCanvas}>
+                    Open
+                  </Link>
                   <button
                     className={styles.deleteBtn}
                     onClick={() => deleteEntry(index)}
@@ -123,4 +127,4 @@ const Scrapbook = () => {
   );
 };
 
-export default Scrapbook;
+export default ScrapbookDash;
