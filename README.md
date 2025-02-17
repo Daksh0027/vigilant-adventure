@@ -16,11 +16,11 @@
 
 ### **Frontend:**
 - **HTML**
-- **Tailwind CSS** 
+- **Tailwind CSS**
+- **React**
 - **JS**
 
 ### **Backend:**
-- **Node.js**
 - **=Firebase** 
 
 ### **Deployment:**
