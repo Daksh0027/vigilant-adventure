@@ -36,7 +36,9 @@
 }
 
 /* Buttons */
-button {
+.button,
+.clearBtn,
+.SubmitBtn {
   margin: 8px 0;
   padding: 12px;
   border: none;
@@ -51,7 +53,7 @@ button {
   text-align: left;
 }
 
-button:hover {
+.button:hover {
   background-color: #ffb300;
 }
 
@@ -89,4 +91,8 @@ button:hover {
   border-radius: 30px;
   margin-left: 20px;
   min-width: 800px;
+}
+
+.upper-canvas {
+  border-radius: 10px;
 }

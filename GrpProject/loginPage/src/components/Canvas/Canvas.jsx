@@ -14,14 +14,15 @@ const ScrapbookCanvas = () => {
   useEffect(() => {
     if (!CanvasInstance.current && CanvasRef.current) {
       CanvasInstance.current = new fabric.Canvas(CanvasRef.current, {
-        width: 800,
-        height: 500,
+        width: 780,
+        height: 450,
+        backgroundColor: "#fbf8e5", // Set background color directly
       });
-
-      CanvasInstance.current.setBackgroundColor(
-        "#fbf8e5",
-        CanvasInstance.current.renderAll.bind(CanvasInstance.current)
+      CanvasInstance.current.freeDrawingBrush = new fabric.PencilBrush(
+        CanvasInstance.current
       );
+      CanvasInstance.current.freeDrawingBrush.width = 5;
+      CanvasInstance.current.freeDrawingBrush.color = "#000000";
 
       CanvasInstance.current.renderAll();
     }
@@ -66,8 +67,10 @@ const ScrapbookCanvas = () => {
     CanvasInstance.current.isDrawingMode =
       !CanvasInstance.current.isDrawingMode;
     if (CanvasInstance.current.isDrawingMode) {
-      CanvasInstance.current.freeDrawingBrush.width = 5;
-      CanvasInstance.current.freeDrawingBrush.color = "#000000";
+      if (CanvasInstance.current.freeDrawingBrush) {
+        CanvasInstance.current.freeDrawingBrush.width = 5;
+        CanvasInstance.current.freeDrawingBrush.color = "#000000";
+      }
     }
   };
 
@@ -82,7 +85,8 @@ const ScrapbookCanvas = () => {
       !CanvasInstance.current.isDrawingMode;
     if (CanvasInstance.current.isDrawingMode) {
       CanvasInstance.current.freeDrawingBrush.width = 10;
-      CanvasInstance.current.freeDrawingBrush.color = "#ffffff"; // Eraser effect
+      CanvasInstance.current.freeDrawingBrush.color =
+        CanvasInstance.current.backgroundColor; // Eraser effect
     }
   };
 
@@ -107,10 +111,8 @@ const ScrapbookCanvas = () => {
     if (!CanvasInstance.current) return;
 
     CanvasInstance.current.clear();
-    CanvasInstance.current.setBackgroundColor(
-      "#ffffff",
-      CanvasInstance.current.renderAll.bind(CanvasInstance.current)
-    );
+    CanvasInstance.current.backgroundColor = "#ffffff";
+    CanvasInstance.current.renderAll();
   };
 
   return (
@@ -124,14 +126,18 @@ const ScrapbookCanvas = () => {
             onChange={ImageUpload}
             className={styles.fileInput}
           />
-          <button onClick={toggleDoodleMode}>
+          <button className={styles.button} onClick={toggleDoodleMode}>
             {isDrawing ? "Disable Doodling" : "Enable Doodling"}
           </button>
-          <button onClick={toggleEraserMode}>
-            {isErasing ? "Disable Eraser" : "Enable Eraser"}
+          <button className={styles.button} onClick={toggleEraserMode}>
+            {isErasing ? "Enable Eraser" : "Disable Eraser"}
           </button>
-          <button onClick={() => addSticker("❤️")}>Add Heart Sticker</button>
-          <button onClick={() => addSticker("⭐")}>Add Star Sticker</button>
+          <button className={styles.button} onClick={() => addSticker("❤️")}>
+            Add Heart Sticker
+          </button>
+          <button className={styles.button} onClick={() => addSticker("⭐")}>
+            Add Star Sticker
+          </button>
           <button onClick={clearCanvas} className={styles.clearBtn}>
             Clear Canvas
           </button>

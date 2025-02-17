@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router";
 import styles from "./Scrapbook.module.css"; // Correctly import the CSS module
 
 const ScrapbookDash = () => {
@@ -107,6 +108,9 @@ const ScrapbookDash = () => {
                   >
                     ✏️
                   </button>
+                  <Link to="/Canvas" className={styles.OpenCanvas}>
+                    Open
+                  </Link>
                   <button
                     className={styles.deleteBtn}
                     onClick={() => deleteEntry(index)}
