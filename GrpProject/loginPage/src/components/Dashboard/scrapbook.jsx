@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Scrapbook.module.css"; // Correctly import the CSS module
 
-const Scrapbook = () => {
+const ScrapbookDash = () => {
   const [entries, setEntries] = useState([
     {
       title: "Trip to Paris",
@@ -123,4 +123,4 @@ const Scrapbook = () => {
   );
 };
 
-export default Scrapbook;
+export default ScrapbookDash;
